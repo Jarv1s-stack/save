@@ -1,0 +1,141 @@
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.emailIcon{
+  width: 20px !important;
+  position: absolute !important;
+  top: 395px !important;
+  left: 584px;
+
+}
+
+.emialInput{
+  position: relative !important;
+  color: white !important;
+}
+
+.passwordInput{
+  position: relative !important;
+  color: white !important;
+
+}
+
+.passwordInput::placeholder, .emailInput::placeholder{
+  color: rgb(183, 183, 183);
+}
+
+.passwordIcon{
+  width: 25px !important;
+  height: 30px !important;
+  position: absolute !important;
+  top: 465px !important;
+  left: 580px;
+}
+
+.loginWrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: inherit;
+  margin-top: -90px;
+}
+.loginBox {
+  background: #4F46E5;
+  color: var(--color-light-text);
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-shadow: 0 2px 24px 0 rgba(79, 70, 229, 0.06);
+  width: 450px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBox input{
+  width: 320px !important;
+  height: 20px !important;
+  border: 2px solid white !important;
+  border-radius: 12px !important;
+  padding-left: 45px !important;
+}
+
+h3 {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  margin-top: -15px;
+}
+label {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: -10px;
+}
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  border: 3px solid white;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  background: none;
+  color: inherit;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.passwordField {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.error {
+  color: #e53935;
+  background: #ffebee;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.98rem;
+  margin-bottom: -10px;
+}
+.loginBtn {
+  margin-top: 8px;
+  background: var(--color-primary);
+  color: #fff;
+  border: white solid 2px;
+  border-radius: 12px;
+  font-size: 1.09rem;
+  font-weight: 600;
+  padding: 7px 22px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 20px;
+}
+.loginBtn:hover {
+  background: #3631c9;
+}
+.registerLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 495px;
+  z-index: 99;
+}
+.registerLink p {
+  color: black;
+  font-size: 13px;
+  text-decoration: none;
+
+}

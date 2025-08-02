@@ -1,0 +1,113 @@
+.shopWrapper {
+  max-width: 1050px;
+  margin: 40px auto 0 auto;
+  padding: 0 10px 50px 10px;
+}
+h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.pointsBar {
+  background: var(--color-light-bg);
+  color: var(--color-primary);
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin-bottom: 18px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border: 1px solid var(--color-light-border);
+  display: inline-block;
+}
+body.dark .pointsBar {
+  background: #191919;
+  color: var(--color-dark-text);
+  border-color: #232323;
+}
+.infoMsg {
+  margin-bottom: 10px;
+  color: #178701;
+  font-weight: 500;
+  background: #eaf8e4;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px 18px;
+}
+.card {
+  background: var(--color-light-bg);
+  border-radius: 15px;
+  box-shadow: 0 2px 14px 0 rgba(79, 70, 229, 0.06);
+  border: 1px solid var(--color-light-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 12px 18px 12px;
+  gap: 6px;
+}
+body.dark .card {
+  background: #191919;
+  border-color: #232323;
+}
+.card img {
+  width: 98px;
+  height: 98px;
+  object-fit: cover;
+  border-radius: 13px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e5e5;
+}
+.cardTitle {
+  font-size: 1.13rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.cardDesc {
+  color: #909090;
+  font-size: 0.98rem;
+  margin-bottom: 7px;
+  text-align: center;
+}
+.cardFooter {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 5px;
+}
+.price {
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--color-primary);
+}
+.buyBtn {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.buyBtn:disabled {
+  background: #dedede;
+  color: #a8a8a8;
+  cursor: not-allowed;
+}
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px 10px;
+  }
+  .card img {
+    width: 80px;
+    height: 80px;
+  }
+}
