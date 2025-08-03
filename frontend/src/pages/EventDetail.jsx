@@ -1,6 +1,6 @@
 // src/pages/EventDetail.jsx
 import React, { useEffect, useState, useContext, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import { AuthContext } from "../context/AuthContext";
 import ChatBox from "../components/ChatBox";
@@ -8,29 +8,25 @@ import styles from "./EventDetail.module.css";
 
 export default function EventDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   let actualUser = authContext?.user;
-  if (actualUser?.user) {
-    actualUser = actualUser.user;
-  }
+  if (actualUser?.user) actualUser = actualUser.user;
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [joinStatus, setJoinStatus] = useState("");
 
-  useEffect(() => {
-    console.log("AuthContext value:", authContext);
-    console.log("Derived actualUser:", actualUser);
-  }, [authContext, actualUser]);
-
+  // проверяем, участвует ли текущий пользователь
   const isParticipant = useMemo(() => {
     if (!event?.participants || !actualUser) return false;
     const userId = String(actualUser.id ?? actualUser.user_id ?? actualUser._id);
-    const participantIds = event.participants.map(p => String(p.id ?? p.user_id ?? p._id));
-    const result = participantIds.includes(userId);
-    return result;
+    return event.participants
+      .map(p => String(p.id ?? p.user_id ?? p._id))
+      .includes(userId);
   }, [event, actualUser]);
 
+  // загрузка события
   const fetchEvent = async () => {
     setLoading(true);
     try {
@@ -77,69 +73,61 @@ export default function EventDetail() {
     }
   };
 
-  if (loading) return <p>Загрузка события…</p>;
-  if (!event) return <p>Событие не найдено.</p>;
+  const handleUserClick = (userId) => {
+    navigate(`/other/${userId}`);
+  };
+
+  if (loading) return <p className={styles.loading}>Загрузка события…</p>;
+  if (!event)  return <p className={styles.error}>Событие не найдено.</p>;
 
   return (
-    <>
-    <div style={{ width: 600, margin: "0 auto", padding: "50px 40px", backgroundColor: "#4F46E5", color: "white", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", borderRadius: "20px" }}>
-      <h1>{event.title}</h1>
-      <p style={{ marginBottom: 20, marginTop: "-10px", textAlign: "center" }}>{event.description}</p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>{event.title}</h1>
+      <p className={styles.description}>{event.description}</p>
 
-      {joinStatus && <p style={{ color: "#444cf7", marginTop: 10 }}>{joinStatus}</p>}
+      {joinStatus && <p className={styles.status}>{joinStatus}</p>}
 
-    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", width: "100%", marginTop: "10px" }}>
-      <div style={{ marginTop: 30, display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center", width: "100%" }}>
-        <h3 style={{marginBottom: "-10px"}} >Участники ({event.participants?.length || 0}):</h3>
-        {event.participants?.length > 0 ? (
-          <ul>
-            {event.participants.map(p => {
-              const name =
-                p.name || p.username || [p.firstName, p.lastName].filter(Boolean).join(" ") ||
-                `ID:${p.id ?? p.user_id ?? p._id}`;
-              return (
-                <li key={p.id ?? p._id}>
-                  {name}{" "}
-                  {String(p.id ?? p.user_id ?? p._id) === String(event.ownerId) &&
-                    "(организатор)"}
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <p>Нет участников</p>
-        )}
-      </div>
-              {!isParticipant ? (
-        <button onClick={handleJoin} style={buttonStyle}>
-          Присоединиться
-        </button>
-      ) : (
-        <button
-          onClick={handleLeave}
-          style={{ ...buttonStyle, background: "#cc2222" }}
-        >
-          Выйти из события
-        </button>
-      )}
-      </div>
-      <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "center", marginTop: "40px", borderTop: "2px solid white", paddingTop: "20px" }}>
-      <ChatBox eventId={id} currentUser={actualUser} />
+      <div className={styles.main}>
+        <div className={styles.participantsBlock}>
+          <h3 className={styles.partHeader}>
+            Участники ({event.participants?.length || 0}):
+          </h3>
+
+          <div className={styles.flex}>
+
+          {event.participants?.length > 0 ? (
+            <ul className={styles.participantsList}>
+              {event.participants.map(participant => {
+                const isMe = String(participant.id) === String(actualUser.id);
+                return (
+                  <li
+                    key={participant.id}
+                    className={styles.participantItem}
+                    onClick={() => handleUserClick(participant.id)}
+                  >
+                    {participant.username}
+                    {isMe && <span className={styles.you}>(вы)</span>}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className={styles.noParticipants}>Нет участников</p>
+          )}
+
+          <button
+            onClick={isParticipant ? handleLeave : handleJoin}
+            className={isParticipant ? styles.leaveBtn : styles.joinBtn}
+          >
+            {isParticipant ? "Выйти из события" : "Присоединиться"}
+          </button>
+          </div>
+        </div>
+
+        <div className={styles.chatBlock}>
+          <ChatBox eventId={id} currentUser={actualUser} />
+        </div>
       </div>
     </div>
-    </>
   );
 }
-
-
-const buttonStyle = {
-  padding: "10px 22px",
-  borderRadius: 10,
-  border: "none",
-  background: "#38DF00",
-  color: "#fff",
-  fontWeight: 500,
-  cursor: "pointer",
-  marginBottom: 18,
-  width: "150px"
-};

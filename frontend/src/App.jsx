@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { AuthContext } from "./context/AuthContext";
 import Footer from "./components/Footer"
+import OtherProfile from "./pages/UserProfile";
 
 function PrivateRoute({ children }) {
   const { user } = React.useContext(AuthContext);
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/create-event" element={<PrivateRoute><CreateEvent /></PrivateRoute>} />
           <Route path="/events/:id" element={<PrivateRoute><EventDetail /></PrivateRoute>} />
+          <Route path='/other/:id' element={<PrivateRoute> <OtherProfile/> </PrivateRoute>}/>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>

@@ -15,5 +15,7 @@ router.get('/:id/points', authenticateToken, userController.getPoints);
 
 router.get('/me', authenticateToken, userController.getMyProfile);
 
+router.get('/other/:id', authenticateToken, userController.getOtherProfile);
+
 
 module.exports = router;

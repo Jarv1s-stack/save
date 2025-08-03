@@ -1,168 +1,104 @@
-.detailWrapper {
-  max-width: 640px;
-  margin: 38px auto 0 auto;
-  padding: 0 6px 40px 6px;
-}
-.backBtn {
-  background: none;
-  border: none;
-  color: var(--color-primary);
-  font-size: 1.02rem;
-  margin-bottom: 11px;
-  cursor: pointer;
-}
-.eventBox {
-  background: var(--color-light-bg);
-  color: var(--color-light-text);
-  border-radius: 14px;
-  border: 1px solid var(--color-light-border);
-  box-shadow: 0 2px 14px 0 rgba(79, 70, 229, 0.06);
-  padding: 24px 19px 17px 19px;
-  margin-bottom: 22px;
-}
-body.dark .eventBox {
-  background: #181818;
-  color: var(--color-dark-text);
-  border-color: #232323;
-}
-.eventHeader {
+/* src/pages/EventDetail.module.css */
+.container {
+  width: 600px;
+  margin: 0 auto;
+  padding: 50px 40px;
+  background-color: #4f46e5;
+  color: #fff;
+  border-radius: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+.description {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.status {
+  color: #444cf7;
+  margin-bottom: 10px;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  flex-direction: column;
+}
+
+.participantsBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.participantsBlock h3{
+  text-align: start;
+}
+
+.partHeader {
+  margin-bottom: 8px;
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 6px;
-}
-.eventHeader h2 {
-  font-size: 1.45rem;
-  font-weight: 600;
-  margin-bottom: 0;
-}
-.eventDate {
-  font-size: 0.97rem;
-  color: #8684a3;
-}
-.eventDesc {
-  margin-bottom: 10px;
-  font-size: 1.09rem;
-}
-.participants {
-  margin-bottom: 10px;
-  font-size: 0.99rem;
-}
-.participants ul {
-  margin: 5px 0 0 0;
-  padding: 0 0 0 13px;
-}
-.joinBtn {
-  background: var(--color-primary);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 10px 20px;
-  margin-top: 7px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.joinBtn:hover {
-  background: #3631c9;
-}
-.error {
-  color: #e53935;
-  background: #ffebee;
-  border-radius: 8px;
-  padding: 6px 13px;
-  margin-top: 6px;
-  font-size: 0.99rem;
-}
-.chatBlock {
-  background: var(--color-light-bg);
-  border: 1px solid var(--color-light-border);
-  border-radius: 14px;
-  margin-top: 11px;
-  padding: 19px 13px 9px 13px;
-}
-body.dark .chatBlock {
-  background: #181818;
-  border-color: #232323;
-}
-.chatTitle {
-  font-weight: 600;
-  font-size: 1.09rem;
-  margin-bottom: 7px;
-}
-.messages {
-  min-height: 62px;
-  max-height: 240px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 9px;
-}
-.msg, .myMsg {
-  border-radius: 9px;
-  padding: 7px 13px 5px 13px;
-  background: #f0f4ff;
-  font-size: 1.01rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.myMsg {
-  background: #d7e2ff;
-  align-self: flex-end;
-}
-.msgUser {
-  font-weight: 500;
-  color: var(--color-primary);
-  margin-bottom: 2px;
-  font-size: 0.95rem;
-}
-.msgContent {
-  margin-bottom: 2px;
-}
-.msgTime {
-  font-size: 0.88rem;
-  color: #969696;
-  align-self: flex-end;
-}
-.emptyChat {
-  color: #bbb;
-  font-size: 0.99rem;
-}
-.chatForm {
-  display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 2px;
+  width: 100%;
 }
-.chatForm input {
-  flex: 1;
-  border: 1px solid var(--color-light-border);
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 1rem;
-  background: none;
-  color: inherit;
-  outline: none;
+
+.participantsList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
 }
-body.dark .chatForm input {
-  border: 1px solid #232323;
-  background: #232323;
-  color: var(--color-dark-text);
-}
-.chatForm button {
-  background: var(--color-primary);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.28rem;
-  font-weight: 600;
-  padding: 6px 15px 6px 13px;
+
+.participantItem {
   cursor: pointer;
-  transition: background 0.18s;
+  text-decoration: underline;
+  margin: 6px 0;
 }
-.chatForm button:hover {
-  background: #3631c9;
+
+.you {
+  color: #d1d1d1;
+  margin-left: 6px;
+}
+
+.joinBtn,
+.leaveBtn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  width: 150px;
+}
+
+.joinBtn {
+  background: #38df00;
+}
+
+.leaveBtn {
+  background: #cc2222;
+}
+
+.chatBlock {
+  flex: 1;
+  border-top: 2px solid white;
+  padding-top: 20px;
+}
+
+/* вспомогательные */
+.loading,
+.error,
+.noParticipants {
+  text-align: center;
 }
